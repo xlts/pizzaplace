@@ -1,0 +1,47 @@
+<%= form_for :pizza_place, url: pizza_places_path do |f| %> 
+
+	<% if @pizza_place.errors.any? %>
+	  <div id="error_explanation">
+	    <h2><%= pluralize(@pizza_place.errors.count, "error") %> prohibited this Pizza place from being saved:</h2>
+	 
+	    <ul>
+	    <% @pizza_place.errors.full_messages.each do |msg| %> 
+	      <li><%= msg %></li>
+	    <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+	<table class="table">
+		<tr>
+			<td><%= f.label :name %></td>
+			<td><%= f.text_field :name %></td>
+		<tr>
+
+		<tr>
+			<td><%= f.label :address %> </td>
+			<td><%= f.text_field :address %> </td>
+		</tr>
+
+		<tr>
+			<td><%= f.label :open_from %> </td>
+			<td><%= f.text_field :open_from %> </td>
+		</tr>
+
+		<tr>
+			<td><%= f.label :open_until %> </td>
+			<td><%= f.text_field :open_until %> </td>
+		</tr>
+	</table>
+
+		<p>
+			Assign to pizza types: <br>
+			<%= collection_check_boxes :pizza_place, :pizza_type_ids, PizzaType.all, :id, :name %>
+		</p>
+
+		<p>
+			<%= f.submit %>
+		</p>
+	
+
+<% end %>

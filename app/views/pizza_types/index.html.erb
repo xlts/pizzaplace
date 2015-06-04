@@ -1,0 +1,32 @@
+<h1> Pizza types </h1>
+<%= link_to 'New pizza type', new_pizza_type_path %>
+
+<hr>
+
+<br>
+<% @pizza_types.each do |type| %>
+	<%= link_to 'Edit', edit_pizza_type_path(type) %>, <%= link_to 'Delete', type, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
+	<h4><%= link_to type.name, type %></h4>
+	<b>Name:</b> 
+	<%= type.name %>
+	<br>
+
+	<b>Price:</b>
+	<%= type.price %>
+	<br>
+
+	<b>Ingredients:</b>
+	<%= type.ingredients %>
+	<br>	
+
+	<b>Pizza places:</b> <% if type.pizza_places.nil? %>
+							none 
+						<% else %>
+							<% type.pizza_places.each do |p| %>
+							 <%= link_to p.name, p %> 
+						    <% end %>
+						<% end %>
+	<hr>
+<% end %>
+
+

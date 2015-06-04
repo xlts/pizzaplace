@@ -1,0 +1,35 @@
+<h1> <%= @pizza_place.name %> </h1>
+
+<%= link_to 'Edit', edit_pizza_place_path(@pizza_place) %>, <%= link_to 'Delete', @pizza_place, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
+
+<table class="table">
+	<tr>
+		<td>Name</td>
+		<td><%= @pizza_place.name %> </td>	
+	</tr>
+	<tr> 
+		<td>Address</td>
+		<td><%= @pizza_place.address %></td>
+	</tr>
+	<tr>
+		<td>Open from</td>
+		<td> <%= @pizza_place.open_from.strftime("%H:%M") %></td>
+	</tr>
+	<tr>
+		<td>Open until </td>
+		<td><%= @pizza_place.open_until.strftime("%H:%M") %> </td>
+	</tr>
+</table>
+
+<p>
+Pizza types: <% if @pizza_place.pizza_types.nil? %>
+							none 
+						<% else %>
+							<% @pizza_place.pizza_types.each do |t| %>
+							 <%= link_to t.name, t %> 
+						    <% end %>
+						<% end %>
+</p>
+<hr>
+
+<%= link_to "Back to pizza places", pizza_places_path %> 
