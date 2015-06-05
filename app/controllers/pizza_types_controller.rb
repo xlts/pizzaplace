@@ -10,9 +10,11 @@ class PizzaTypesController < ApplicationController
 
 	def create
 		@pizza_type = PizzaType.new(pizza_type_params)
-		@pizza_type.save
-
-		redirect_to @pizza_type
+		if @pizza_type.save
+			redirect_to @pizza_type
+		else
+			render :new
+		end	
 	end
 
 	def show
@@ -24,9 +26,11 @@ class PizzaTypesController < ApplicationController
 	end
 
 	def update
-		@pizza_type.update(pizza_type_params)
-		
-		redirect_to pizza_types_path
+		if @pizza_type.update(pizza_type_params)
+			redirect_to pizza_types_path
+		else
+			render :edit
+		end
 	end
 
 	def destroy

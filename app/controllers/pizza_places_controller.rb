@@ -10,9 +10,11 @@ class PizzaPlacesController < ApplicationController
 
 	def create
 		@pizza_place = PizzaPlace.new(pizza_place_params)
-		@pizza_place.save
-
-		redirect_to @pizza_place
+		if @pizza_place.save
+			redirect_to @pizza_place
+		else
+			render :new
+		end
 	end
 
 	def show
@@ -26,9 +28,11 @@ class PizzaPlacesController < ApplicationController
 	end
 
 	def update 
-		@pizza_place.update(pizza_place_params)
-
-		redirect_to pizza_places_path
+		if @pizza_place.update(pizza_place_params)
+			redirect_to pizza_places_path
+		else
+			render :edit
+		end
 	end
 
 	def destroy
